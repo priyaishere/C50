@@ -37,6 +37,7 @@
 
 #include "transform.h"
 #include "redefine.h"
+#include "math.h"
 
 /*************************************************************************/
 /*									 */
@@ -87,12 +88,14 @@ double TotalInfo(double V[], DiscrValue MinVal, DiscrValue MaxVal)
     DiscrValue	v;
     double	Sum=0.0, TotalCases=0;
     CaseCount	N;
+ 	double q=1.5;
+	double r=1/(q-1);
 
     ForEach(v, MinVal, MaxVal)
     {
 	N = V[v];
 
-	Sum += N * Log(N);
+	Sum = r*(1-(sum+pow(N,q));
 	TotalCases += N;
     }
 
