@@ -95,9 +95,10 @@ double TotalInfo(double V[], DiscrValue MinVal, DiscrValue MaxVal)
     {
 	N = V[v];
 
-	Sum = r*(Log(Sum+pow(N,alpha)));
+	Sum = (Sum+pow(N,alpha));
 	TotalCases += N;
     }
+	Sum=r*Log(Sum);
 
     return TotalCases * Log(TotalCases) - Sum;
 }
