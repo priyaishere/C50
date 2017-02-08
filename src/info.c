@@ -89,13 +89,13 @@ double TotalInfo(double V[], DiscrValue MinVal, DiscrValue MaxVal)
     double	Sum=0.0, TotalCases=0;
     CaseCount	N;
  	double q=8.6;
-	double r=1/(q-1);
+	double r=1/(1-q);
 
     ForEach(v, MinVal, MaxVal)
     {
 	N = V[v];
 
-	Sum = r*(1-(Sum+pow(N,q)));
+	Sum = r*((Sum+pow(N,q))-1);
 	TotalCases += N;
     }
 
