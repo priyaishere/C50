@@ -88,8 +88,8 @@ double TotalInfo(double V[], DiscrValue MinVal, DiscrValue MaxVal)
     DiscrValue	v;
     double	Sum=0.0, TotalCases=0;
     CaseCount	N;
- 	double alpha=-5.5;
-	double r=1/(1-alpha);
+ 	double alpha=0.1;
+	double r=1/(alpha-1);
 
     ForEach(v, MinVal, MaxVal)
     {
@@ -99,7 +99,8 @@ double TotalInfo(double V[], DiscrValue MinVal, DiscrValue MaxVal)
 	   // Sum += N*Log(N);
 	TotalCases += N;
     }
-	Sum=r*Log(Sum);
+	Sum=1-Sum;
+	Sum=r*Sum;
 
     return TotalCases * Log(TotalCases) - Sum;
 }
