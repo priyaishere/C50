@@ -37,6 +37,7 @@
 
 #include "transform.h"
 #include "redefine.h"
+#include "math.h"
 
 
 /*************************************************************************/
@@ -367,12 +368,14 @@ void Merge(DiscrValue x, DiscrValue y, CaseCount Cases)
     double	Entr=0;
     CaseCount	KnownCases=0;
     int		R, C;
+	double alpha=0.01;
+	double r=1/(1-alpha);
 
     AddBlock(x, y);
 
     ForEach(c, 1, MaxClass)
     {
-	Entr -= GEnv.Freq[x][c] * Log(GEnv.Freq[x][c]);
+	Entr -= r*pow(GEnv.Freq[x][c],alpha);
 	KnownCases += GEnv.Freq[x][c];
     }
 
@@ -428,6 +431,8 @@ void EvaluatePair(DiscrValue x, DiscrValue y, CaseCount Cases)
     ClassNo	c;
     double	Entr=0;
     CaseCount	KnownCases=0, F;
+	double alpha=0.01;
+	double r=1/(1-alpha);
 
     if ( y < x )
     {
@@ -442,10 +447,10 @@ void EvaluatePair(DiscrValue x, DiscrValue y, CaseCount Cases)
     ForEach(c, 1, MaxClass)
     {
 	F = GEnv.Freq[x][c] + GEnv.Freq[y][c];
-	Entr -= F * Log(F);
+	Entr -= r*pow(F,alpha);
 	KnownCases += F;
     }
-    GEnv.MergeEntr[x][y] = Entr + KnownCases * Log(KnownCases);
+    GEnv.MergeEntr[x][y] = Entr + r*pow(KnownCases,alpha);
 }
 
 
