@@ -110,13 +110,13 @@ void EvalSubset(Attribute Att, CaseCount Cases)
     }
 
     KnownCases  = Cases - GEnv.ValFreq[0];
-    UnknownRate = GEnv.ValFreq[0] / Cases;
+    UnknownRate = GEnv.ValFreq[0] ;
 
     BaseInfo = ( ! GEnv.ValFreq[0] ? GlobalBaseInfo :
 		     DiscrKnownBaseInfo(KnownCases, MaxAttVal[Att]) );
 
     PrevGain = ComputeGain(BaseInfo, UnknownRate, MaxAttVal[Att], KnownCases);
-    PrevInfo = TotalInfo(GEnv.ValFreq, 0, MaxAttVal[Att]) / Cases;
+    PrevInfo = TotalInfo(GEnv.ValFreq, 0, MaxAttVal[Att]);
     BestVal  = PrevGain / PrevInfo;
 
     Verbosity(2, fprintf(Of, "\tAtt %s", AttName[Att]))
@@ -202,13 +202,13 @@ void EvalSubset(Attribute Att, CaseCount Cases)
 
     if ( Prelim )
     {
-	PrevInfo = TotalInfo(GEnv.ValFreq, 0, GEnv.Blocks) / Cases;
+	PrevInfo = TotalInfo(GEnv.ValFreq, 0, GEnv.Blocks);
 
 	Penalty  = ( finite(Bell[InitialBlocks][GEnv.Blocks]) ?
 			Log(Bell[InitialBlocks][GEnv.Blocks]) :
 			(InitialBlocks-GEnv.Blocks+1) * Log(GEnv.Blocks) );
 
-	Val = (PrevGain - Penalty / Cases) / PrevInfo;
+	Val = (PrevGain - Penalty) / PrevInfo;
 	Better = ( GEnv.Blocks >= 2 && GEnv.ReasonableSubsets >= 2 &&
 		   Val >= BestVal );
 
@@ -241,7 +241,7 @@ void EvalSubset(Attribute Att, CaseCount Cases)
 
     ForEach(V1, 1, GEnv.Blocks)
     {
-	GEnv.SubsetInfo[V1] = r*pow(GEnv.ValFreq[V1],alpha) / Cases;
+	GEnv.SubsetInfo[V1] = r*pow(GEnv.ValFreq[V1],alpha);
 	GEnv.SubsetEntr[V1] = TotalInfo(GEnv.Freq[V1], 1, MaxClass);
     }
 
@@ -280,7 +280,7 @@ void EvalSubset(Attribute Att, CaseCount Cases)
 			     (GEnv.MergeEntr[V1][V2] -
 			       (GEnv.SubsetEntr[V1] + GEnv.SubsetEntr[V2]));
 		ThisInfo = PrevInfo + (GEnv.MergeInfo[V1][V2] -
-			   (GEnv.SubsetInfo[V1] + GEnv.SubsetInfo[V2])) / Cases;
+			   (GEnv.SubsetInfo[V1] + GEnv.SubsetInfo[V2]));
 		Verbosity(3,
 		    fprintf(Of, "\t    combine %d %d info %.3f gain %.3f\n",
 			    V1, V2, ThisInfo, ThisGain))
@@ -309,7 +309,7 @@ void EvalSubset(Attribute Att, CaseCount Cases)
 			Log(Bell[InitialBlocks][GEnv.Blocks-1]) :
 			(InitialBlocks-GEnv.Blocks+1) * Log(GEnv.Blocks-1) );
 
-	Val = (BestGain - Penalty / Cases) / BestInfo;
+	Val = (BestGain - Penalty) / BestInfo;
 
 	Merge(BestV1, BestV2, Cases);
 
@@ -382,7 +382,7 @@ void Merge(DiscrValue x, DiscrValue y, CaseCount Cases)
     }
 	Entr=r*Entr;
 
-    GEnv.SubsetInfo[x] = r*(pow(GEnv.ValFreq[x],alpha)/Cases)-1;
+    GEnv.SubsetInfo[x] = r*(pow(GEnv.ValFreq[x],alpha))-1;
     GEnv.SubsetEntr[x] = Entr + r*(pow(KnownCases,alpha))-1;
 
     /*  Eliminate y from working blocks  */
@@ -445,7 +445,7 @@ void EvaluatePair(DiscrValue x, DiscrValue y, CaseCount Cases)
     }
 
     F = GEnv.ValFreq[x] + GEnv.ValFreq[y];
-    GEnv.MergeInfo[x][y] =  r*(pow(F,alpha)/Cases)-1;
+    GEnv.MergeInfo[x][y] =  r*(pow(F,alpha))-1;
 
     ForEach(c, 1, MaxClass)
     {
