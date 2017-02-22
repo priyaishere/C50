@@ -87,7 +87,7 @@ void EvalSubset(Attribute Att, CaseCount Cases)
     int		MissingValues=0;
     CaseCount	KnownCases;
     Boolean	Better;
-	double alpha=-0.15;
+	double alpha=-1.25;
 	double r=1/(alpha-1);
 
     /*  First compute Freq[][], ValFreq[], base info, and the gain
