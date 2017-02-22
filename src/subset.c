@@ -434,7 +434,7 @@ void EvaluatePair(DiscrValue x, DiscrValue y, CaseCount Cases)
     ClassNo	c;
     double	Entr=0;
     CaseCount	KnownCases=0, F;
-	double alpha=-0.15;
+	double alpha=-1.25;
 	double r=1/(alpha-1);
 
     if ( y < x )
