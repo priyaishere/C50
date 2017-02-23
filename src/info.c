@@ -113,7 +113,7 @@ double TotalInfo(double V[], DiscrValue MinVal, DiscrValue MaxVal)
  	double alpha=0.72;
 	double r=1/(alpha-1);
 
-    ForEach(v, MinVal1, MaxVal1)
+    ForEach(v, MinVal, MaxVal)
     {
 	N = V[v];
 
