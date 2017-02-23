@@ -72,7 +72,7 @@ double ComputeGain(double BaseInfo, float UnknFrac, DiscrValue MaxVal,
     /*  Set the gain in information for all cases, adjusted for unknowns  */
 
     return ( BaseInfo <= ThisInfo ? 0.0 :
-	     (1 - UnknFrac) * (BaseInfo - (ThisInfo*Assval)) );
+	     (1 - UnknFrac) * (BaseInfo - ThisInfo) );
 
 }
 
