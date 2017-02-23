@@ -52,7 +52,7 @@ double ComputeGain(double BaseInfo, float UnknFrac, DiscrValue MaxVal,
 {
     DiscrValue	v;
     double	ThisInfo=0.0;
-	double	Assval=0.0;
+	//double	Assval=0.0;
 
     /*  Check whether all values are unknown or the same  */
 
@@ -64,10 +64,10 @@ double ComputeGain(double BaseInfo, float UnknFrac, DiscrValue MaxVal,
     ForEach(v, 1, MaxVal)
     {
 	ThisInfo += TotalInfo(GEnv.Freq[v], 1, MaxClass);
-	    Assval += Assfun(GEnv.Freq[v], 1, MaxClass);
+	    //Assval += Assfun(GEnv.Freq[v], 1, MaxClass);
     }
     ThisInfo /= TotalCases;
-	Assval /= TotalCases;
+	//Assval /= TotalCases;
 
     /*  Set the gain in information for all cases, adjusted for unknowns  */
 
@@ -76,8 +76,8 @@ double ComputeGain(double BaseInfo, float UnknFrac, DiscrValue MaxVal,
 
 }
 
-double Assfun(double V[], DiscrValue MinVal1, DiscrValue MaxVal1)
-/*     ---------  */
+/*double Assfun(double V[], DiscrValue MinVal1, DiscrValue MaxVal1)
+
 {
     DiscrValue	v;
     double	Sum=0.0, TotalCases=0;
@@ -94,7 +94,7 @@ double Assfun(double V[], DiscrValue MinVal1, DiscrValue MaxVal1)
 	TotalCases += N;
     }
     return Sum/TotalCases ;
-}
+}*/
 
 /*************************************************************************/
 /*									 */
@@ -118,11 +118,13 @@ double TotalInfo(double V[], DiscrValue MinVal, DiscrValue MaxVal)
 
 	Sum += (pow(N,alpha));
 	   // Sum += N*Log(N);
+	    Sum1 += N;
 	TotalCases += N;
     }
 Sum=1-Sum;
 	Sum=Sum*r;
-    return Sum-(r*(1-pow(TotalCases,alpha))) ;
+	Sum1=Sum1/TotalCases;
+    return Sum-((r*(1-pow(TotalCases,alpha)))*Sum1) ;
 }
 
 
