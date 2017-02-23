@@ -38,7 +38,7 @@
 #include "redefine.h"
 #include "math.h"
 #define alpha -1.25
-#define r 1/(alpha-1);
+#define r 1/(alpha-1)
 
 #define	PartInfo(n) (r*(1-(pow(n,alpha)))/GEnv.Cases)
 
