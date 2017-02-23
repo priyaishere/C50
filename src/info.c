@@ -85,7 +85,7 @@ double Assfun(double V[], DiscrValue MinVal1, DiscrValue MaxVal1)
  	//double alpha=0.72;
 	//double r=1/(alpha-1);
 
-    ForEach(v, MinVal, MaxVal)
+    ForEach(v, MinVal1, MaxVal1)
     {
 	N = V[v];
 
