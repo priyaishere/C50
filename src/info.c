@@ -76,7 +76,25 @@ double ComputeGain(double BaseInfo, float UnknFrac, DiscrValue MaxVal,
 
 }
 
+double Assfun(double V[], DiscrValue MinVal, DiscrValue MaxVal)
+/*     ---------  */
+{
+    DiscrValue	v;
+    double	Sum=0.0, TotalCases=0;
+    CaseCount	N;
+ 	double alpha=0.72;
+	double r=1/(alpha-1);
 
+    ForEach(v, MinVal, MaxVal)
+    {
+	N = V[v];
+
+	Sum += N;
+	   // Sum += N*Log(N);
+	TotalCases += N;
+    }
+    return Sum/TotalCases ;
+}
 
 /*************************************************************************/
 /*									 */
@@ -107,25 +125,7 @@ Sum=1-Sum;
     return Sum-(r*(1-pow(TotalCases,alpha))) ;
 }
 
-double Assfun(double V[], DiscrValue MinVal, DiscrValue MaxVal)
-/*     ---------  */
-{
-    DiscrValue	v;
-    double	Sum=0.0, TotalCases=0;
-    CaseCount	N;
- 	double alpha=0.72;
-	double r=1/(alpha-1);
 
-    ForEach(v, MinVal, MaxVal)
-    {
-	N = V[v];
-
-	Sum += N;
-	   // Sum += N*Log(N);
-	TotalCases += N;
-    }
-    return Sum/TotalCases ;
-}
 
 
 
