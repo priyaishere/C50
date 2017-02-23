@@ -87,7 +87,7 @@ void EvalSubset(Attribute Att, CaseCount Cases)
     int		MissingValues=0;
     CaseCount	KnownCases;
     Boolean	Better;
-	double alpha=-1.25;
+	double alpha=0.72;
 	double r=1/(alpha-1);
 
     /*  First compute Freq[][], ValFreq[], base info, and the gain
@@ -370,7 +370,7 @@ void Merge(DiscrValue x, DiscrValue y, CaseCount Cases)
     double	Entr=0;
     CaseCount	KnownCases=0;
     int		R, C;
-	double alpha=-0.15;
+	double alpha=0.72;
 	double r=1/(alpha-1);
 
     AddBlock(x, y);
@@ -434,7 +434,7 @@ void EvaluatePair(DiscrValue x, DiscrValue y, CaseCount Cases)
     ClassNo	c;
     double	Entr=0;
     CaseCount	KnownCases=0, F;
-	double alpha=-1.25;
+	double alpha=0.72;
 	double r=1/(alpha-1);
 
     if ( y < x )
